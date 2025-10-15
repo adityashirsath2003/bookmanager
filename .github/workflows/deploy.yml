@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 env:
-  AWS_REGION: ap-south-1
+  AWS_REGION: ap-northeast-3
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 
 jobs:
@@ -17,9 +17,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x'
-      - run: dotnet restore ./BookManager/BookManager.csproj
-      - run: dotnet build ./BookManager/BookManager.csproj --no-restore --configuration Release
-      - run: dotnet test ./BookManager/BookManager.csproj --no-build --verbosity normal
+      - run: dotnet restore BookManager.csproj
+      - run: dotnet build BookManager.csproj --no-restore --configuration Release
+      - run: dotnet test BookManager.csproj --no-build --verbosity normal
 
   publish:
     needs: build
@@ -38,7 +38,7 @@ jobs:
         run: |
           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.REPOSITORY%%/* }}
       - name: Build Docker Image
-        working-directory: ./BookManager
+        working-directory: ./
         run: |
           IMAGE_URI=${{ secrets.REPOSITORY }}:latest
           dotnet publish -c Release -p:ContainerRepository=${{ secrets.REPOSITORY }} -p:RuntimeIdentifier=linux-x64
