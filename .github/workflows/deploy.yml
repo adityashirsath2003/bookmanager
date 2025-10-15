@@ -16,9 +16,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x'
-      - run: dotnet restore BookManager.csproj
-      - run: dotnet build BookManager.csproj --no-restore --configuration Release
-      - run: dotnet test BookManager.csproj --no-build --verbosity normal
+      - run: dotnet restore BookApplication.csproj
+      - run: dotnet build BookApplication.csproj --no-restore --configuration Release
+      - run: dotnet test BookApplication.csproj --no-build --verbosity normal
 
   publish:
     needs: build
