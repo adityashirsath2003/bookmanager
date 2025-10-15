@@ -1,1 +1,87 @@
-
+{
+  "compatibilities": [
+    "EC2",
+    "FARGATE",
+    "MANAGED_INSTANCES"
+  ],
+  "containerDefinitions": [
+    {
+      "cpu": 0,
+      "environment": [],
+      "environmentFiles": [],
+      "essential": true,
+      "image": "496653567514.dkr.ecr.ap-northeast-3.amazonaws.com/verisk/bookmanager:latest",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/Task",
+          "awslogs-create-group": "true",
+          "awslogs-region": "ap-northeast-3",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      },
+      "mountPoints": [],
+      "name": "MyContainer",
+      "portMappings": [
+        {
+          "appProtocol": "http",
+          "containerPort": 80,
+          "hostPort": 80,
+          "name": "mycontainer-80-tcp",
+          "protocol": "tcp"
+        }
+      ],
+      "systemControls": [],
+      "ulimits": [],
+      "volumesFrom": []
+    }
+  ],
+  "cpu": "1024",
+  "enableFaultInjection": false,
+  "executionRoleArn": "arn:aws:iam::496653567514:role/ecsTaskExecutionRole",
+  "family": "Task",
+  "memory": "3072",
+  "networkMode": "awsvpc",
+  "placementConstraints": [],
+  "registeredAt": "2025-10-15T10:45:25.450Z",
+  "registeredBy": "arn:aws:iam::496653567514:user/u12",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "name": "ecs.capability.task-eni"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+    }
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "revision": 1,
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "status": "ACTIVE",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-3:496653567514:task-definition/Task:1",
+  "volumes": [],
+  "tags": []
+}
